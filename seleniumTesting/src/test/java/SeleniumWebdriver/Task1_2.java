@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Task1_2 {
     public static void main(String[] args) throws InterruptedException {
+        //Write to program
 
         String pic = "C:\\Users\\ShivaKumarBantu\\Downloads\\pic.jpg";
 

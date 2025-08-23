@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 public class Task2_1 {
+
+    //WebDriver instance
     public WebDriver driver;
 
     @Test(priority = 1)
