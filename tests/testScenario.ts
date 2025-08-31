@@ -1,37 +1,21 @@
-import { chromium, Browser, Page } from 'playwright';
-import test from 'playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('epam ', async function runTest() {
-  let browser: Browser | undefined;
-  try {
-    browser = await chromium.launch();
-    const page: Page = await browser.newPage();
+test('Navigate to EPAM and verify Client Work', async ({ page }) => {
+  // Step 1: Navigate to https://www.epam.com/
+  await page.goto('https://www.epam.com/');
+  await page.waitForLoadState('domcontentloaded');
 
-    // Navigate to https://www.epam.com/
-    await page.goto('https://www.epam.com/');
+  // Step 2: Select "Services" from the header menu.
+  const servicesMenu = page.locator('a[href="/services"]');
+  await servicesMenu.click();
+  await page.waitForLoadState('domcontentloaded');
 
-    // Wait for "Services" menu and click
-    await page.waitForSelector('text=Services', { state: 'visible', timeout: 10000 });
-    await page.click('text=Services');
+  // Step 3: Click the "Explore Our Client Work" link.
+  const exploreClientWorkLink = page.locator('a[href="/our-work"]');
+  await exploreClientWorkLink.click();
+  await page.waitForLoadState('domcontentloaded');
 
-    // Wait for "Explore Our Client Work" link and click
-    await page.waitForSelector('text=Explore Our Client Work', { state: 'visible', timeout: 10000 });
-    await page.click('text=Explore Our Client Work');
-
-    // Wait for "Client Work" text to be visible
-    const clientWorkVisible = await page.isVisible('text=Client Work');
-    if (clientWorkVisible) {
-      console.log('Test Passed: "Client Work" text is visible on the page.');
-    } else {
-      console.log('Test Failed: "Client Work" text is not visible on the page.');
-    }
-  } catch (error) {
-    console.error('Test Failed:', error);
-  } finally {
-    if (browser) {
-      await browser.close();
-    }
-  }
-}
-
-);
+  // Step 4: Verify that the "Client Work" text is visible on the page.
+  const clientWorkText = page.locator('text=Client Work');
+  await expect(clientWorkText).toBeVisible();
+});
