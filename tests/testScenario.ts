@@ -1,6 +1,7 @@
 import { chromium, Browser, Page } from 'playwright';
+import test from 'playwright/test';
 
-async function runTest() {
+test('epam ', async function runTest() {
   let browser: Browser | undefined;
   try {
     browser = await chromium.launch();
@@ -33,4 +34,4 @@ async function runTest() {
   }
 }
 
-runTest();
+);

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/shivabantuk/EliteAPractice#readme",
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "@types/node": "^24.3.0"
+    "@types/node": "^24.3.0",
+    "ts-node": "^10.9.2"
   }
 }
