@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 test('EPAM Client Work Test', async ({ page }) => {
   // Step 1: Navigate to https://www.epam.com/
   await page.goto('https://www.epam.com/');
+  // Wait for the "Services" menu to be visible before clicking
+await page.waitForSelector('text=Services', { state: 'visible' });
 
   // Step 2: Select "Services" from the header menu.
   await page.click('text=Services');
