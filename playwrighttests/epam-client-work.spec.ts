@@ -1,0 +1,1 @@
+import { test, expect } from '@playwright/test';\n\ntest('EPAM Client Work Test', async ({ page }) => {\n  // Step 1: Navigate to https://www.epam.com/\n  await page.goto('https://www.epam.com/');\n\n  // Step 2: Select \"Services\" from the header menu\n
