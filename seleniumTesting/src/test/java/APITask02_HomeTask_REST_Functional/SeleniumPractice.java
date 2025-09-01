@@ -1,4 +1,4 @@
-package SeleniumWebdriver;
+package APITask02_HomeTask_REST_Functional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -15,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class Task2_1 {
+public class SeleniumPractice {
 
     //WebDriver instance
     public WebDriver driver;
@@ -28,7 +29,7 @@ public class Task2_1 {
         driver.get("https://www.seleniumeasy.com/lander");
     }
 
-    @Test(priority = 2, retryAnalyzer = retry.class)
+    @Test(priority = 2)
     public void task2step2() throws InterruptedException {
         //a[contains(@href,'https://www.seleniumeasy.com/lander?query=Selenium+Testing')]
         driver.navigate().refresh();
@@ -37,7 +38,7 @@ public class Task2_1 {
         driver.findElement(By.xpath("//a[contains(@href,'https://www.seleniumeasy.com/lander?query=Selenium+Testing')]")).click();
     }
 
-    @Test(dependsOnMethods = "task2step2", priority = 3, retryAnalyzer = retry.class)
+    @Test(dependsOnMethods = "task2step2", priority = 3)
     public void task2step3() throws InterruptedException {
         driver.navigate().refresh();
         WebElement iframe2 = driver.findElement(By.xpath("(//iframe)[3]"));
@@ -61,4 +62,6 @@ public class Task2_1 {
         driver.findElement(By.xpath("(//a[@class='p_ si27 a'])[2]")).click();
 
     }
+
+
 }
