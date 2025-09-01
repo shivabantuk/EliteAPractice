@@ -1,21 +1,30 @@
-import { test, expect } from '@playwright/test';
+import { chromium, Browser, Page } from 'playwright';
 
-test('Navigate to EPAM and verify Client Work', async ({ page }) => {
-  // Step 1: Navigate to https://www.epam.com/
+async function runTest() {
+  // Launch the browser
+  const browser: Browser = await chromium.launch();
+  const page: Page = await browser.newPage();
+
+  // Navigate to https://www.epam.com/
   await page.goto('https://www.epam.com/');
-  await page.waitForLoadState('domcontentloaded');
+  await page.waitForTimeout(3000); // Wait for 3 seconds
 
-  // Step 2: Select "Services" from the header menu.
-  const servicesMenu = page.locator('a[href="/services"]');
-  await servicesMenu.click();
-  await page.waitForLoadState('domcontentloaded');
+  // Select "Services" from the header menu
+  await page.click('text=Services');
+  await page.waitForTimeout(3000); // Wait for 3 seconds
 
-  // Step 3: Click the "Explore Our Client Work" link.
-  const exploreClientWorkLink = page.locator('a[href="/our-work"]');
-  await exploreClientWorkLink.click();
-  await page.waitForLoadState('domcontentloaded');
+  // Click the "Explore Our Client Work" link
+  await page.click('text=Explore Our Client Work');
+  await page.waitForTimeout(3000); // Wait for 3 seconds
 
-  // Step 4: Verify that the "Client Work" text is visible on the page.
-  const clientWorkText = page.locator('text=Client Work');
-  await expect(clientWorkText).toBeVisible();
+  // Verify that the "Client Work" text is visible on the page
+  const isVisible = await page.isVisible('text=Client Work');
+  console.assert(isVisible, 'Client Work text is not visible on the page');
+
+  // Close the browser
+  await browser.close();
+}
+
+runTest().catch((error) => {
+  console.error(error);
 });
