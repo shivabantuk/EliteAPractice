@@ -1,17 +1,19 @@
 import { test, expect } from '@playwright/test';
 
-test('EPAM Client Work Test', async ({ page }) => {
+test('Navigate to EPAM and verify Client Work', async ({ page }) => {
+  // Step 1: Navigate to https://www.epam.com/
   await page.goto('https://www.epam.com/');
+  await page.waitForTimeout(2000); // Wait for 2 seconds
 
-  // Wait for "Services" to be visible before clicking
-  await page.waitForSelector('text=Services', { state: 'visible', timeout: 10000 });
-  await page.click('text=Services');
+  // Step 2: Select "Services" from the header menu
+  await page.hover('text=Services');
+  await page.waitForTimeout(2000); // Wait for 2 seconds
 
-  // Wait for "Explore Our Client Work" to be visible before clicking
-  await page.waitForSelector('text=Explore Our Client Work', { state: 'visible', timeout: 10000 });
+  // Step 3: Click the "Explore Our Client Work" link
   await page.click('text=Explore Our Client Work');
+  await page.waitForTimeout(2000); // Wait for 2 seconds
 
-  // Verify "Client Work" text is visible
-  const clientWorkText = await page.locator('text=Client Work');
-  await expect(clientWorkText).toBeVisible();
+  // Step 4: Verify that the "Client Work" text is visible on the page
+  const clientWorkText = await page.isVisible('text=Client Work');
+  expect(clientWorkText).toBeTruthy();
 });
